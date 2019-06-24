@@ -3,8 +3,8 @@
 _count=3
 _delay=2
 url=http://localhost:8888
-health_log_file=~/ir_health_check/health.log
-reboot_log_file=~/ir_health_check/reboot.log
+health_log_file=/root/ir_health_check/health.log
+reboot_log_file=/root/ir_health_check/reboot.log
 
 ok_msg="Service is UP"
 error_msg="Service is DOWN"
@@ -14,7 +14,7 @@ FOREBEAR=/opt/iridiumserver/forebear.sh
 
 check()
 {
-  curl $url -k -s -f -o /dev/null --connect-timeout 2 -w "%{http_code}"
+  curl $url -k -s -f -o /dev/null --connect-timeout 2 && echo 200 || echo "ERROR"
 }
 
 timestamp()
@@ -69,3 +69,4 @@ sleep 24
 try
 
 exit
+
